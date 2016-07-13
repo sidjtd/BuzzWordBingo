@@ -1,12 +1,4 @@
-/*                                ▂▃▅▇▓▒▓▇▅▃▂
-                              ▂▃▅▇▓▒░  ★★ ░▒▓▇▅▃▂
-                          ▂▃▅▇▓▒░♚♛♜♝♞♟★★♔♕♖♗♘░▒▓▇▅▃▂
-                      ▂▃▅▇▓▒░۩۞۩♚♛♜♝♞♟ ★★ ♔♕♖♗♘۩۞۩░▒▓▇▅▃▂
-                  ▂▃▅▇█▓▒░۩۞۩♚♛♜♝♞ ♟   ★★   ♔♕♖♗♘♙۩۞۩░▒▓█▇▅▃▂
-              ▂▃▅▇█▓▒░۩۞۩♚ ♛ ♜ ♝ ♞ ♟   ★★   ♔ ♕  ♖  ♗♘♙۩۞۩░▒▓█▇▅▃▂
-           ▂▃▅▇█▓▒░۩۞۩ ♚ ♛ ♜  ♝  ♞ ♟   ★★   ♔ ♕   ♖  ♗  ♘ ♙۩۞۩░▒▓█▇▅▃▂
-       ▂▃▅▇█▓▒░۩۞۩  ♚  ♛  ♜  ♝  ♞  ♟   ★★   ♔  ♕  ♖  ♗  ♘  ♙   ۩۞۩░▒▓█▇▅▃▂
-   ▂▃▅▇█▓▒░۩۞۩     ♚  ♛  ♜  ♝  ♞   ♟   ★★   ♔    ♕  ♖  ♗  ♘  ♙     ۩۞۩░▒▓█▇▅▃▂
+/*
    ------------------------------------------------------------------------------
    |                            BUZZWORD BINGO
    ______________________________________________________________________________
@@ -21,13 +13,11 @@ var PORT = 4000;
 /*                ROUTES
  ____________________________________________________
  ----------------------------------------------------  */
- // var countRouter = require('./routes/counter');
 
 /*              MIDDLEWARE
  ____________________________________________________
  ----------------------------------------------------  */
 app.use(express.static('public'));
-// app.use('/counter',countRouter);
 
  /*              EXPRESS
  ____________________________________________________
@@ -46,23 +36,18 @@ app.get('/', (req, res) =>{
 
 app.get('/buzzwords', (req, res) => {
   res.send( { "buzzwords": arr});
+//res.json(buzzWords);
 });
-// app.get('/buzzwords', function (req, res) {
-//   res.json(buzzWords);
-// });
 
-app.post('/', (req, res) => {
+app.post('/buzzwords', (req, res) => {
    var body = req.body;
   if(typeof body.buzzWord === 'string' && body.buzzWord && typeof Number(body.points) === 'number' && body.points) {
     buzzWords[body.buzzWord] = body;
     return res.json({"success" : true});
   }
   return res.json({"success" : false});
-  // app.use(bodyParser.urlencoded({ extended: true }));
-  //   // ^ parse application/x-www-form-urlencoded
-  // res.send('POST request to homepage');
-// });
 });
+
 
 var server = app.listen(PORT, function (){
   var host = server.address().address;
